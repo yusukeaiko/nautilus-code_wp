@@ -2,4 +2,51 @@
 Theme Name: NAUTILUS::CODE AMP対応テンプレート
 Version: 1.0
 */
-@charset "utf-8";
+a {
+  color: #2A4073;
+  text-decoration: dashed underline;
+}
+
+header {
+  margin: 0;
+  padding: 10px;
+  color: #fff;
+  background-color: #2A4073;
+  overflow: hidden ;
+  clear: both;
+}
+header .brand {
+  margin: 0;
+  padding: 0;
+  float: left;
+  height: 100%;
+  vertical-align: middle;
+}
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+header nav {
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+header nav ul {
+  margin: 0;
+  padding: 0;
+}
+header nav ul li {
+  padding-left: 6px;
+  display: inline-block;
+}
+
+@media screen and (max-width: 1023px) {/*0px-1023px*/
+}
+
+@media screen and (min-width: 1024px) {/*1024px-*/
+  #container, footer{
+    width: 1024px;
+    padding: 6px;
+    margin: 0 auto;
+  }
+}
