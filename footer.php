@@ -10,7 +10,7 @@ wp_nav_menu(array(
 ));
 ?>
     </nav>
-    <div>&copy; <?php bloginfo('name'); ?></div>
+    <div class="copyright">&copy; <?php bloginfo('name'); ?></div>
   </footer>
 </body>
 </html>

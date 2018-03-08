@@ -3,7 +3,6 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <title><?php wp_title(' | ', true, 'right'); bloginfo('name'); ?></title>
-  <link rel="canonical" href="<?php echo (is_ssl() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <?php wp_head(); ?>
@@ -25,8 +24,11 @@
 
 <body>
   <header>
-    <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png' ?>" width="162" height="24"></amp-img></a></div>
-    <nav>
+    <?php $subtext_tag = is_front_page() ? 'h1' : 'p'; ?>
+    <<?php echo $subtext_tag; ?> class="header_subtext">システム開発とデジタルマーケティング</<?php echo $subtext_tag; ?>>
+    <div class="header_main">
+      <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png' ?>" width="162" height="24"></amp-img></a></div>
+      <nav>
 <?php
 wp_nav_menu(array(
   'theme_location' => 'primary',
@@ -35,6 +37,16 @@ wp_nav_menu(array(
   'depth'          => 1
 ));
 ?>
-    </nav>
+      </nav>
+    </div>
+    <div class="header_eyecatch">
+      <div class="header_pagetitle">
+        <?php if (is_front_page() || is_home()): ?>
+          <p><?php echo bloginfo('name'); ?></p>
+        <?php else: ?>
+          <h1><?php the_title(); ?></h1>
+        <?php endif; ?>
+      </div>
+    </div>
   </header>
   <main>

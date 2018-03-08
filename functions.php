@@ -29,10 +29,10 @@ add_action('wp_enqueue_scripts', 'init_scripts');
 
 function minified_css() {
   $dir = dirname(__FILE__) . '/';
-  require_once ($dir . 'assets/lib/php-html-css-js-minifier.php');
+  require_once($dir . 'assets/lib/php-html-css-js-minifier.php');
   $origin_css    = $dir . 'style.css';
   $origin_date   = filemtime($origin_css);
-  $minified_css  = $dir . 'style.min.css';
+  $minified_css  = $dir . 'style.min.css.php';
   $minified_date = filemtime($minified_css);
   $refresh_flag = false;
   if (!file_exists($minified_css)) {
@@ -44,8 +44,9 @@ function minified_css() {
     $css = minify_css(file_get_contents($origin_css));
     file_put_contents($minified_css, $css);
   }
-  $inline_css = file_get_contents($minified_css);
-  echo "<style amp-custom>{$inline_css}</style>";
+  echo '<style amp-custom>';
+  require($minified_css);
+  echo '</style>';
 }
 
 /* Navigation */
