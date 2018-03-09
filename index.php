@@ -1,9 +1,17 @@
 <?php get_header(); ?>
 
-<section>
-<?php if (have_posts()): while (have_posts()): the_post(); ?>
-  <?php the_content(); ?>
-<?php endwhile; wp_reset_postdata(); endif; ?>
+<section class="articles">
+  <h2>Archives</h2>
+<?php
+if (have_posts()) {
+  while (have_posts()) {
+    the_post();
+    get_template_part('_partial/blog_list_article');
+  }
+  echo paginate_links();
+  wp_reset_postdata(); 
+}
+?>
 </section>
 
 <?php get_footer(); ?>

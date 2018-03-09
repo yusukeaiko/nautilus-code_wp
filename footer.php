@@ -12,5 +12,6 @@ wp_nav_menu(array(
     </nav>
     <div class="copyright">&copy; <?php bloginfo('name'); ?></div>
   </footer>
+  <?php wp_footer(); ?>
 </body>
 </html>
