@@ -1,4 +1,50 @@
 <?php
+/* Setup */
+function setup_nc_amp() {
+  add_rewrite_endpoint('sitemap.xml', EP_NONE);
+  flush_rewrite_rules();
+}
+add_action('after_setup_theme', 'setup_nc_amp');
+/* /Setup */
+
+/* Basic */
+function init_constructor() {
+  /* disable_emoji */
+  remove_action('wp_head', 'print_emoji_detection_script', 7);
+  remove_action('admin_print_scripts', 'print_emoji_detection_script');
+  remove_action('wp_print_styles', 'print_emoji_styles');
+  remove_action('admin_print_styles', 'print_emoji_styles');
+  remove_filter('the_content_feed', 'wp_staticize_emoji');
+  remove_filter('comment_text_rss', 'wp_staticize_emoji');
+  remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+  /* rewrite config */
+  add_rewrite_endpoint('sitemap.xml', EP_NONE);
+}
+add_action('init', 'init_constructor');
+
+function page_redirect() {
+  global $wp_query;
+  if (isset($wp_query->query['pagename']) && $wp_query->query['pagename'] == 'sitemap.xml') {
+    // sitemap.xml
+    $dir = dirname(__FILE__) . '/';
+    require_once($dir . 'common/lib/sitemap.xml.php');
+    $post_types = array('post', 'page');
+    sitemap_xml($post_types);
+    exit;
+  }
+}
+add_action('template_redirect', 'page_redirect');
+
+function init_scripts() {
+  if (!is_admin()) {
+    wp_deregister_script('jquery');
+  }
+  wp_enqueue_style('NotoSansJP', 'https://fonts.googleapis.com/earlyaccess/notosansjapanese.css');
+  wp_enqueue_style('Inconsolata', 'https://fonts.googleapis.com/css?family=Inconsolata');
+  wp_enqueue_style('FontAwesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+}
+add_action('wp_enqueue_scripts', 'init_scripts');
+
 function  dns_prefetch() {
   $prefetch = ''; //'<meta http-equiv="x-dns-prefetch-control" content="on">';
   $domains  = array($_SERVER['SERVER_NAME'], 'cdn.ampproject.org');
@@ -8,24 +54,6 @@ function  dns_prefetch() {
   echo "{$prefetch}\n";
 }
 add_action("wp_head", "dns_prefetch", 0);
-
-function disable_emoji() {
-  remove_action('wp_head', 'print_emoji_detection_script', 7);
-  remove_action('admin_print_scripts', 'print_emoji_detection_script');
-  remove_action('wp_print_styles', 'print_emoji_styles');
-  remove_action('admin_print_styles', 'print_emoji_styles');
-  remove_filter('the_content_feed', 'wp_staticize_emoji');
-  remove_filter('comment_text_rss', 'wp_staticize_emoji');
-  remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-}
-add_action('init', 'disable_emoji');
-
-function init_scripts() {
-  if (!is_admin()) {
-    wp_deregister_script('jquery');
-  }
-}
-add_action('wp_enqueue_scripts', 'init_scripts');
 
 function minified_css() {
   $dir = dirname(__FILE__) . '/';
@@ -48,10 +76,39 @@ function minified_css() {
   require($minified_css);
   echo '</style>';
 }
+/* /Basic */
 
 /* Navigation */
 register_nav_menus(array(
   'primary'        => __('グローバルナビゲーション', 'nautilus-code_amp'),
 ));
 /* /Navigation */
+
+/* Custom Fields */
+function add_custom_fields() {
+  $post_id = '';
+  if (isset($_GET['post']) || isset($_POST['post_ID'])) {
+    $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+  }
+  if ($post_id == get_option('page_on_front')) {
+    add_meta_box('frontpage_custom_content', 'カスタムコンテンツ (HTMLタグ)', 'frontpage_fields_input', 'page', 'normal', 'default');
+  }
+}
+add_action('add_meta_boxes', 'add_custom_fields');
+ 
+function frontpage_fields_input() {
+  global $post;
+  echo '<p>ページ上部に表示されるカスタムコンテンツを登録できます。HTMLタグを使って記述してください。</p>';
+  echo '<textarea name="frontpage_custom_content" rows="16" style="width: 100%;">' . get_post_meta($post->ID, 'frontpage_custom_content', true) . '</textarea>';
+}
+
+function frontpage_fields_save($post_id) {
+  if (!empty($_POST['frontpage_custom_content'])) {
+    update_post_meta($post_id, 'frontpage_custom_content', $_POST['frontpage_custom_content'] );
+  } else {
+    delete_post_meta($post_id, 'frontpage_custom_content');
+  }
+}
+add_action('save_post', 'frontpage_fields_save');
+/* /Custom Fields */
 ?>
