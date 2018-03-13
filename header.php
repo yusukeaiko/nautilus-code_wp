@@ -23,15 +23,19 @@
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+  <!-- AMP Analytics --><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 </head>
 
 <body>
+  <!-- Google Tag Manager -->
+  <amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-P483JHJ&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
   <header>
-    <?php $subtext_tag = is_front_page() ? 'h1' : 'p'; ?>
-    <<?php echo $subtext_tag; ?> class="header_subtext"><?php echo bloginfo('description'); ?></<?php echo $subtext_tag; ?>>
-    <div class="header_main">
-      <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png' ?>" width="162" height="24"></amp-img></a></div>
-      <nav>
+    <div class="header_container">
+      <?php $subtext_tag = is_front_page() ? 'h1' : 'p'; ?>
+      <<?php echo $subtext_tag; ?> class="header_subtext"><?php echo bloginfo('description'); ?></<?php echo $subtext_tag; ?>>
+      <div class="header_main">
+        <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png' ?>" width="162" height="24"></amp-img></a></div>
+        <nav>
 <?php
 wp_nav_menu(array(
   'theme_location' => 'primary',
@@ -40,7 +44,8 @@ wp_nav_menu(array(
   'depth'          => 1
 ));
 ?>
-      </nav>
+        </nav>
+      </div>
     </div>
     <div class="header_eyecatch">
       <div class="header_pagetitle">

@@ -23,7 +23,7 @@ if ($blog_posts) : foreach($blog_posts as $blog_post) : setup_postdata($blog_pos
     <dl class="post_meta">
       <dt><i class="fa fa-clock-o" aria-hidden="true"></i></dt><dd><time><?php echo $blog_post->post_date; ?></time></dd>
       <?php if (get_the_category($blog_post->ID)): ?>
-        <dt><i class="fa fa-folder" aria-hidden="true"></i></dt><dd><?php the_category(', ', 'multiple', $blog_post->ID); ?></dd>
+        <dt><i class="fa fa-folder" aria-hidden="true"></i></dt><dd><?php the_category(', ', 'single', $blog_post->ID); ?></dd>
       <?php endif; ?>
 <?php
 $blog_post_tags = wp_get_post_tags($blog_post->ID);
@@ -40,7 +40,11 @@ if (count($blog_post_tags) > 0) {
     </dl>
     <hr>
   </article>
-<?php endforeach; endif; wp_reset_postdata(); ?>
+<?php
+endforeach; endif; wp_reset_postdata();
+$home_id = get_option('page_for_posts');
+?>
+<a href="<?php echo get_page_link($home_id); ?>">MORE</a>
 </section>
 
 <section>

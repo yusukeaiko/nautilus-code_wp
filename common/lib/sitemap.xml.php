@@ -13,7 +13,7 @@ function sitemap_xml($post_types) {
   foreach ($all_posts as $sitemap_post) {
     echo '<url>';
     echo '<loc>' . get_permalink($sitemap_post->ID) . '</loc>';
-    echo '<lastmod>' . $sitemap_post->post_modified_gmt . '</lastmod>';
+    echo '<lastmod>' . date('Y-m-d', strtotime($sitemap_post->post_modified)) . '</lastmod>';
     echo '</url>';
   }
   wp_reset_postdata();
