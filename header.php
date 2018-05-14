@@ -24,11 +24,11 @@
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
   <!-- AMP Analytics --><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <?php echo nc_option('google_analytics_tag'); ?>
 </head>
 
 <body>
-  <!-- Google Tag Manager -->
-  <amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-P483JHJ&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+  <?php echo nc_option('google_tagmanager_tag'); ?>
   <header>
     <div class="header_container">
       <?php $subtext_tag = is_front_page() ? 'h1' : 'p'; ?>

@@ -1,7 +1,7 @@
 <?php
 /* Setup */
 require_once(dirname(__FILE__) . '/admin/custom_fields.php');
-require_once(dirname(__FILE__) . '/admin/template_config.php');
+require_once(dirname(__FILE__) . '/admin/template_configurator.php');
 
 function setup_nc_amp() {
   //add_rewrite_endpoint('sitemap.xml', EP_NONE);
@@ -114,6 +114,11 @@ function minified_css() {
   echo '<style amp-custom>';
   require($minified_css);
   echo '</style>';
+}
+
+function nc_option($option_name) {
+  $option_values = get_option('nct001');
+  return $option_values && array_key_exists($option_name, $option_values) ? $option_values[$option_name] : '';
 }
 /* /Basic */
 
