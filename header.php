@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="theme-color" content="#2A4073" />
   <?php wp_head(); ?>
-  <link rel='stylesheet' id='NotoSansJP-css' href='https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' type='text/css' media='all' />
+  <!-- <link rel='stylesheet' id='NotoSansJP-css' href='https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' type='text/css' media='all' /> -->
   <?php minified_css(); ?>
   <?php if (false): ?><!--<script type="application/ld+json">
 {
@@ -47,17 +47,13 @@ wp_nav_menu(array(
         </nav>
       </div>
     </div>
-    <div class="header_eyecatch">
-      <div class="header_pagetitle">
-        <?php if ((is_front_page() && is_home()) || is_front_page()): ?>
-          <p><?php echo bloginfo('name'); ?></p>
+  </header>
+  <main>
+    <!-- <?php if ((is_front_page() && is_home()) || is_front_page()): ?>
+      <p><?php echo bloginfo('name'); ?></p>
           <p class="header_description"><?php echo bloginfo('description'); ?></p>
         <?php elseif (is_home() || is_archive()): ?>
           <h1>Archives</h1>
         <?php else: ?>
           <h1><?php the_title(); ?></h1>
-        <?php endif; ?>
-      </div>
-    </div>
-  </header>
-  <main>
+        <?php endif; ?> -->

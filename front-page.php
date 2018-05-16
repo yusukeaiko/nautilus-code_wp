@@ -17,10 +17,8 @@ $args = array(
 );
 $blog_posts = get_posts($args);
 if ($blog_posts) : foreach($blog_posts as $blog_post) : setup_postdata($blog_post); ?>
-  <article>
-    <h3><a href="<?php echo get_permalink($blog_post->ID); ?>"><?php echo $blog_post->post_title; ?></a></h3>
-    <p><?php echo $blog_post->post_excerpt; ?></p>
-    <dl class="post_meta">
+<article>
+<dl class="post_meta">
       <dt><i class="fa fa-clock-o" aria-hidden="true"></i></dt><dd><time><?php echo $blog_post->post_date; ?></time></dd>
       <?php if (get_the_category($blog_post->ID)): ?>
         <dt><i class="fa fa-folder" aria-hidden="true"></i></dt><dd><?php the_category(', ', 'single', $blog_post->ID); ?></dd>
@@ -38,8 +36,9 @@ if (count($blog_post_tags) > 0) {
 ?>
   <?php the_tags('<dt><i class="fa fa-tags" aria-hidden="true"></i></dt><dd>', ', ' ,'</dd>');?>
     </dl>
-    <hr>
-  </article>
+  <h3><a href="<?php echo get_permalink($blog_post->ID); ?>"><?php echo $blog_post->post_title; ?></a></h3>
+  <p><?php the_excerpt(); ?></p>
+</article>
 <?php
 endforeach; endif; wp_reset_postdata();
 $home_id = get_option('page_for_posts');

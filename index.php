@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <section class="articles">
-  <h2>Archives</h2>
+  <h1>Archives</h1>
 <?php
 if (have_posts()) {
   while (have_posts()) {
