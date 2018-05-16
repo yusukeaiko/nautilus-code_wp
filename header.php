@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="theme-color" content="#2A4073" />
+  <link rel="manifest" href="/manifest.json">
   <?php wp_head(); ?>
   <!-- <link rel='stylesheet' id='NotoSansJP-css' href='https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' type='text/css' media='all' /> -->
   <?php minified_css(); ?>
@@ -34,7 +35,7 @@
       <?php $subtext_tag = is_front_page() ? 'h1' : 'p'; ?>
       <<?php echo $subtext_tag; ?> class="header_subtext"><?php echo bloginfo('description'); ?></<?php echo $subtext_tag; ?>>
       <div class="header_main">
-        <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png' ?>" width="162" height="24"></amp-img></a></div>
+        <div class="brand"><a href="/"><amp-img alt="<?php bloginfo('name'); ?>" src="<?php echo get_template_directory_uri() . '/common/img/nautilus-code_logo.png'; ?>" width="162" height="24"></amp-img></a></div>
         <nav>
 <?php
 wp_nav_menu(array(

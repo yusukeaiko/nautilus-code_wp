@@ -4,8 +4,6 @@ require_once(dirname(__FILE__) . '/admin/custom_fields.php');
 require_once(dirname(__FILE__) . '/admin/template_configurator.php');
 
 function setup_nc_amp() {
-  //add_rewrite_endpoint('sitemap.xml', EP_NONE);
-  //flush_rewrite_rules();
 }
 add_action('after_setup_theme', 'setup_nc_amp');
 /* /Setup */
@@ -30,12 +28,15 @@ add_action('init', 'init_constructor');
 
 function theme_custom_query_vars($vars) {
   $vars[] = 'sitemap.xml';
+  $vars[] = 'manifest.json';
   return $vars;
 }
 add_filter('query_vars', 'theme_custom_query_vars');
 function theme_register_endpoints() {
   add_rewrite_rule('^sitemap\.xml', 'index.php?sitemap=sitemap.xml', 'top');
   add_rewrite_endpoint('sitemap', EP_PERMALINK);
+  add_rewrite_rule('^manifest\.json', 'index.php?manifest=manifest.json', 'top');
+  add_rewrite_endpoint('manifest', EP_PERMALINK);
   flush_rewrite_rules();
 }
 add_action('init', 'theme_register_endpoints');
@@ -48,6 +49,16 @@ function theme_endpoints($templates = '') {
     require_once($dir . 'common/lib/sitemap.xml.php');
     $post_types = array('post', 'page');
     sitemap_xml($post_types);
+    exit;
+  } else if (array_key_exists('manifest', $template) && 'manifest.json' == $template['manifest']) {
+    // manifest.json
+    $manifest = array(
+      'short_name' => get_bloginfo('name'),
+      'name' => get_bloginfo('name'),
+      'theme_color' => '#2A4073'
+    );
+    header('content-type: application/json; charset=utf-8');
+    echo json_encode($manifest);
     exit;
   }
 }
