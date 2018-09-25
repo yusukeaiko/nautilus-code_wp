@@ -1,0 +1,39 @@
+.nc_admin {
+  margin: 10px;
+  padding: 0 18px;
+  background-color: #fff;
+  border: 1px solid gray;
+}
+
+.nc_admin .notice {
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.nc_admin form dl,
+.nc_admin form dt,
+.nc_admin form dd {
+  margin: 0;
+  padding: 0;
+}
+
+.nc_admin form dt {
+  font-weight: bold;
+  padding: 3px 0;
+}
+
+.nc_admin form dd {
+  margin-bottom: 6px;
+} 
+
+input[type="text"] {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  height: 8em;
+}

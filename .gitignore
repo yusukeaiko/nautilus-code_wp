@@ -17,3 +17,53 @@ wp-content/plugins/hello.php
 /sitemap.xml
 /sitemap.xml.gz
 
+# Ignore template files.
+*~
+\#*\#
+.~*
+
+# Ignore find(Mac's filer) config files.
+.DS_Store
+._.*
+
+### Windows ###
+## Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+## Folder config file
+Desktop.ini
+.DAV
+
+## Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+## Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+## Windows shortcuts
+*.lnk
+
+#
+#### Linux ###
+*~
+
+## temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+## KDE directory preferences
+.directory
+
+## Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# Ignore TAGS
+/TAGS
+/tags
+
+# Ignore gulp
+/node_modules
+/_map
